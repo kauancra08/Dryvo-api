@@ -1,0 +1,20 @@
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: drywall-db
+    environment:
+      POSTGRES_DB: ${DB_NAME:-drywall}
+      POSTGRES_USER: ${DB_USER:-drywall}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-drywall_dev_password}
+    ports:
+      - "5432:5432"
+    volumes:
+      - drywall-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-drywall} -d ${DB_NAME:-drywall}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  drywall-db-data:

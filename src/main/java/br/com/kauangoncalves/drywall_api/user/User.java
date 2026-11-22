@@ -1,0 +1,42 @@
+package br.com.kauangoncalves.drywall_api.user;
+
+import br.com.kauangoncalves.drywall_api.common.persistence.BaseEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "users")
+public class User extends BaseEntity {
+
+    @Column(nullable = false, length = 120)
+    private String name;
+
+    @Column(nullable = false, length = 255)
+    private String email;
+
+    @Column(length = 30)
+    private String phone;
+
+    @Column(name = "password_hash", nullable = false, length = 100)
+    private String passwordHash;
+
+    protected User() {
+    }
+
+    public User(String name, String email, String phone, String passwordHash) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.passwordHash = passwordHash;
+    }
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+    public String getPhone() { return phone; }
+    public void setPhone(String phone) { this.phone = phone; }
+    public String getPasswordHash() { return passwordHash; }
+    public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
+}
